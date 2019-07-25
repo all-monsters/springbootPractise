@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Title</title>
+</head>
+<body>
+<form id="user-name-label">
+<span>姓名</span><input name="name" type="text" placeholder="请输入姓名"/><br/>
+<span>年龄</span><select name="age"  >
+    <option>5</option>
+    <option>20</option>
+    <option>101</option>
+</select><br/>
+
+<span>性别</span><label><input type="radio" name="gender" value="男"/>男</label>
+<label><input type="radio" name="gender" value="女"/>女</label><br/>
+
+<input type="button" value="提交" onclick="us()"/>
+</form>
+</body>
+
+<script src="../static/jquery-3.3.1.min.js"></script>
+</html>
+
+<script>
+
+var us=function () {
+$.ajax({
+url:"http://localhost:8080/user",
+type:"get",
+data:$("#user-name-label").serialize(),
+dataType:"json",
+success:function (rs) {
+console.info(rs);
+alert(JSON.stringify(rs));
+},
+error:function (rs) {
+console.info(rs)
+}
+})
+
+}</script>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Title</title>
+</head>
+<body>
+<form id="login">
+    <span>用户名&nbsp;&nbsp;</span><input name="username" type="text" /><br/>
+    <span>密&nbsp;&nbsp;&nbsp;码&nbsp;&nbsp;</span><input name="password" type="text"/><br/>
+
+    <input type="button" value="提交" onclick="login()"/>
+</form>
+<script src="../static/jquery-3.3.1.min.js"></script>
+</body>
+<script>
+    var login=function () {
+        $.ajax({
+            url:"http://localhost:8080/interceptor",
+            data:$("#login").serialize(),
+            type:"get",
+            success:function (rs) {
+
+                if (rs=="登录成功") window.location.href='http://localhost:63342/springboot/templates/success.html';
+            },
+            error:function () {
+                alert("抱歉，您的用户名或密码为空，" +
+                    "请求已被拦截")
+            }
+        })
+    }
+</script>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Title</title>
+</head>
+<body>
+<form id="user-name-label">
+    <span>姓名&nbsp;&nbsp;</span><input name="name" type="text"/>
+    <span style="color: blue" id="nameback"></span><br/>
+    <span>电话&nbsp;&nbsp;</span><input name="phone" type="text"/><br/>
+    <span>邮箱&nbsp;&nbsp;</span><input name="email" type="text"/><br/>
+    <span>年龄&nbsp;&nbsp;</span><select name="age">
+        <option>5</option>
+        <option>20</option>
+        <option>101</option>
+    </select><br/>
+    <span>性别&nbsp;&nbsp;</span>
+    <label><input type="radio" name="gender" value="男"/>男</label>
+    <label><input type="radio" name="gender" value="女"/>女</label><br/>
+    <input type="button" value="提交" onclick="us()"/>
+</form>
+<script src="../static/jquery-3.3.1.min.js"></script>
+</body>
+<script>
+    var us=function () {
+        $.ajax({
+            url:"http://localhost:8080/reg",
+            data:$("#user-name-label").serialize(),
+            type:"get",
+            success:function (rs) {
+                $("#nameback").html(JSON.stringify(rs));
+                if (rs=="") window.location.href='http://localhost:63342/springboot/templates/success.html';
+            },
+            error:function (rs) {
+                alert("error")
+            }
+        })
+    }
+</script>
+</html>
